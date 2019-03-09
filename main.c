@@ -29,7 +29,7 @@
 #define DC   206 // ╬, Double Center
 #define MaxGrile 10
 
-void Game(){
+void GrilleVide(){
     int grille[MaxGrile][MaxGrile];
 
     for(int i = 0;i < MaxGrile;i++){
@@ -82,7 +82,12 @@ void Game(){
     }
     printf("%c%c%c",SHSB,SHSB,SHSB);
     printf("%c",SBRC);
-
+}
+void GrilleFixe(){
+    GrilleVide();
+    for (int i = 1; i < 3; ++i) {
+        grille[i][0] = 1
+    }
 }
 
 int main() {
@@ -96,7 +101,7 @@ int main() {
         scanf("%d",&choice);
 
         if (choice == 1) {
-            Game();
+            GrilleVide();
             scanf("%d",&test);
             return 0;
         }
