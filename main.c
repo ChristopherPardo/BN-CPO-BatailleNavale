@@ -29,7 +29,7 @@
 #define DC   206 // ╬, Double Center
 #define MaxGrile 10
 
-void Game(){
+void GrilleVide(){
     int grille[MaxGrile][MaxGrile];
 
     for(int i = 0;i < MaxGrile;i++){
@@ -37,9 +37,9 @@ void Game(){
             grille[i][j] = 0;
         }
     }
-    printf("\n\n    A B C D E F G H I J\n");
+    printf("\n\n    A   B   C   D   E   F   G   H   I   J\n");
     for (int i = 0; i < MaxGrile;i++){
-        printf("   ");
+        printf("  ");
         if(i == 0){
             printf("%c",STLC);
         }
@@ -47,15 +47,18 @@ void Game(){
             printf("%c",SVLB);
         }
         if(i == 0){
-            for (int k = 0; k < MaxGrile*2; ++k) {
-                printf("%c",SHSB);
+            for (int k = 0; k < MaxGrile-1; ++k) {
+                printf("%c%c%c",SHSB,SHSB,SHSB);
+                printf("%c",SHTB);
             }
+            printf("%c%c%c",SHSB,SHSB,SHSB);
         }
         else{
-            for (int k = 0; k < MaxGrile; ++k) {
-                printf("%c",SHSB);
-                printf("%c",SHBB);
+            for (int k = 0; k < MaxGrile-1; ++k) {
+                printf("%c%c%c",SHSB,SHSB,SHSB);
+                printf("%c",SC);
             }
+            printf("%c%c%c",SHSB,SHSB,SHSB);
         }
         if(i == 0){
             printf("%c",STRC);
@@ -63,16 +66,28 @@ void Game(){
         else{
             printf("%c",SVRB);
         }
-        printf("\n%d  ",i+1);
+        printf("\n%d",i+1);
         if(i < 9) {
             printf(" ");
         }
         for (int j = 0; j < MaxGrile; ++j) {
-            printf("%d ",grille[i][j]);
+            printf("%c %d ",SVSB,grille[i][j]);
         }
-        printf("\n");
+        printf("%c\n",SVSB);
     }
-
+    printf("  %c",SBLC);
+    for (int l = 0; l < MaxGrile-1; ++l) {
+        printf("%c%c%c",SHSB,SHSB,SHSB);
+        printf("%c",SHBB);
+    }
+    printf("%c%c%c",SHSB,SHSB,SHSB);
+    printf("%c",SBRC);
+}
+void GrilleFixe(){
+    GrilleVide();
+    for (int i = 1; i < 3; ++i) {
+        grille[i][0] = 1
+    }
 }
 
 int main() {
@@ -86,7 +101,7 @@ int main() {
         scanf("%d",&choice);
 
         if (choice == 1) {
-            Game();
+            GrilleVide();
             scanf("%d",&test);
             return 0;
         }

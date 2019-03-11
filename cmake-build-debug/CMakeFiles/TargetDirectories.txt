@@ -1,3 +1,3 @@
-P:/1re annee/Modules d'application/MA-20/Repository/BN-CPO-BatailleNavale/cmake-build-debug/CMakeFiles/BatailleNavale.dir
-P:/1re annee/Modules d'application/MA-20/Repository/BN-CPO-BatailleNavale/cmake-build-debug/CMakeFiles/edit_cache.dir
-P:/1re annee/Modules d'application/MA-20/Repository/BN-CPO-BatailleNavale/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+F:/CPNV/BN-CPO-BatailleNavale/cmake-build-debug/CMakeFiles/BatailleNavale.dir
+F:/CPNV/BN-CPO-BatailleNavale/cmake-build-debug/CMakeFiles/edit_cache.dir
+F:/CPNV/BN-CPO-BatailleNavale/cmake-build-debug/CMakeFiles/rebuild_cache.dir
