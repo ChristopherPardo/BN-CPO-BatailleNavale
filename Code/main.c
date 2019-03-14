@@ -1,7 +1,7 @@
 /*
  * Bataille Navale
  * Christopher Pardo
- * 03.03.2019
+ * 14.03.2019
  */
 #include <stdio.h>
 #include <windows.h>
@@ -16,27 +16,25 @@
 #define SHBB 193 // ┴, Single Horizontal Bottom Border
 #define SHTB 194 // ┬, Single Horizontal Top Border
 #define SC   197 // ┼, Single Center
-#define DTLC 201 // ╔, Double Top Left Corner
-#define DTRC 187 // ╗, Double Top Right Corner
-#define DBLC 200 // ╚, Double Bottom Left Corner
-#define DBRC 188 // ╝, Double Bottom Right Corner
-#define DVSB 186 // ║, Double Vertical Simple Border
-#define DVRB 185 // ╣, Double Vertical Right Border
-#define DVLB 204 // ╠, Double Vertical Left Border
-#define DHSB 205 // ═, Double Horizontal Simple Border
-#define DHBB 202 // ╩, Double Horizontal Bottom Border
-#define DHTB 203 // ╦, Double Horizontal Top Border
-#define DC   206 // ╬, Double Center
+
 #define MaxGrile 10
 
-void GrilleVide(){
-    int grille[MaxGrile][MaxGrile];
+int grille[MaxGrile][MaxGrile];
 
+void BateauxFixes(){ //ca marche pas
+    for (int i = 5; i < 8; ++i) {
+        grille[i][1];
+    }
+}
+
+void SansBateaux(){ //ca marche pas
     for(int i = 0;i < MaxGrile;i++){
         for (int j = 0; j < MaxGrile;j++) {
             grille[i][j] = 0;
         }
     }
+}
+void GrilleVide(){
     printf("\n\n    A   B   C   D   E   F   G   H   I   J\n");
     for (int i = 0; i < MaxGrile;i++){
         printf("  ");
@@ -84,9 +82,7 @@ void GrilleVide(){
     printf("%c",SBRC);
 }
 void GrilleFixe(){
-    GrilleVide();
-    for (int i = 1; i < 3; ++i)
-    }
+
 }
 
 int main() {
@@ -100,6 +96,7 @@ int main() {
         scanf("%d",&choice);
 
         if (choice == 1) {
+            BateauxFixes();
             GrilleVide();
             scanf("%d",&test);
             return 0;
