@@ -12,14 +12,14 @@ Vous aurez besoin de:
 
 Pour générer l'exécutable, vous devez:
 
-1. Aller à "https://github.com/ChristopherPardo/BN-CPO-BatailleNavale.git"
-1. Cliquez sur "Clone or download"
-1. Cliquez sur "Download Zip"
-1. Enregistrez le fichier sur votre Ordinateur
-1. Décopressez le fichier
+1. Aller sur le repository https://github.com/ChristopherPardo/BN-CPO-BatailleNavale
+1. copier le code du main.c .
+1. crée un nouveau projet dans une application qui utilise le language C tel que Clion.
+1. compiler le programme.
 
 ## Exécution
 Pour exécuter le programme, vous devez:
 
-Double-cliquez sur BatailleNavale.exe
+1. Aller dans le dossier qui contient l'executable.
+1. Double-cliquez sur BN_DMI_BataileNavale.ex
 
