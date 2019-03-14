@@ -85,8 +85,7 @@ void GrilleVide(){
 }
 void GrilleFixe(){
     GrilleVide();
-    for (int i = 1; i < 3; ++i) {
-        grille[i][0] = 1
+    for (int i = 1; i < 3; ++i)
     }
 }
 
