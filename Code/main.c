@@ -1,7 +1,7 @@
 /*
  * Bataille Navale
  * Christopher Pardo
- * 14.03.2019
+ * 15.03.2019
  */
 #include <stdio.h>
 #include <windows.h>
@@ -21,19 +21,18 @@
 
 int grille[MaxGrile][MaxGrile];
 
-void BateauxFixes(){ //ca marche pas
+void BateauxFixes(){
     for (int i = 5; i < 8; ++i) {
-        grille[i][1];
+        grille[i][1] = 1;
+    }
+    for (int i = 3; i < 7; ++i) {
+        grille[0][i] = 1;
+    }
+    for (int i = 6; i < 8; ++i) {
+        grille[6][i] = 1;
     }
 }
 
-void SansBateaux(){ //ca marche pas
-    for(int i = 0;i < MaxGrile;i++){
-        for (int j = 0; j < MaxGrile;j++) {
-            grille[i][j] = 0;
-        }
-    }
-}
 void GrilleVide(){
     printf("\n\n    A   B   C   D   E   F   G   H   I   J\n");
     for (int i = 0; i < MaxGrile;i++){
@@ -81,10 +80,27 @@ void GrilleVide(){
     printf("%c%c%c",SHSB,SHSB,SHSB);
     printf("%c",SBRC);
 }
-void GrilleFixe(){
+void Tire(){
+    int tir[1];
+    char col = tir[0] - 49;
+    char ligne = tir[0] - 56;
 
+    printf("Choisir une case");
+    scanf("%s",&tir);
+
+    while(col > 0 || col < 9 || ligne > 0 || ligne < 9){
+        printf("Il n'y a pas de case ici\n\n");
+        printf("Choisir une case");
+        scanf("%s",&tir);
+
+        char col = tir[0] - 49;
+        char ligne = tir[0] - 56;
+    }
+    //ajouter affichage case
+    //ajouter le touché
+    //ajouter le coulé
+    //ajouter fin de la partie (gagné)
 }
-
 int main() {
     int choice = 0;
     int test = 0;
