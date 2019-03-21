@@ -1,10 +1,11 @@
 /*
  * Bataille Navale
  * Christopher Pardo
- * 15.03.2019
+ * 21.03.2019
  */
 #include <stdio.h>
 #include <windows.h>
+
 #define STLC 218 // ┌, Single Top Left Corner
 #define STRC 191 // ┐, Single Top Right Corner
 #define SBLC 192 // └, Single Bottom Left Corner
@@ -21,7 +22,7 @@
 
 int grille[MaxGrile][MaxGrile];
 
-void BateauxFixes(){
+void BateauxFixes() {
     for (int i = 5; i < 8; ++i) {
         grille[i][1] = 1;
     }
@@ -33,101 +34,112 @@ void BateauxFixes(){
     }
 }
 
-void GrilleVide(){
+void GrilleVide() {
     printf("\n\n    A   B   C   D   E   F   G   H   I   J\n");
-    for (int i = 0; i < MaxGrile;i++){
+    for (int i = 0; i < MaxGrile; i++) {
         printf("  ");
-        if(i == 0){
-            printf("%c",STLC);
+        if (i == 0) {
+            printf("%c", STLC);
+        } else {
+            printf("%c", SVLB);
         }
-        else{
-            printf("%c",SVLB);
-        }
-        if(i == 0){
-            for (int k = 0; k < MaxGrile-1; ++k) {
-                printf("%c%c%c",SHSB,SHSB,SHSB);
-                printf("%c",SHTB);
+        if (i == 0) {
+            for (int k = 0; k < MaxGrile - 1; ++k) {
+                printf("%c%c%c", SHSB, SHSB, SHSB);
+                printf("%c", SHTB);
             }
-            printf("%c%c%c",SHSB,SHSB,SHSB);
-        }
-        else{
-            for (int k = 0; k < MaxGrile-1; ++k) {
-                printf("%c%c%c",SHSB,SHSB,SHSB);
-                printf("%c",SC);
+            printf("%c%c%c", SHSB, SHSB, SHSB);
+        } else {
+            for (int k = 0; k < MaxGrile - 1; ++k) {
+                printf("%c%c%c", SHSB, SHSB, SHSB);
+                printf("%c", SC);
             }
-            printf("%c%c%c",SHSB,SHSB,SHSB);
+            printf("%c%c%c", SHSB, SHSB, SHSB);
         }
-        if(i == 0){
-            printf("%c",STRC);
+        if (i == 0) {
+            printf("%c", STRC);
+        } else {
+            printf("%c", SVRB);
         }
-        else{
-            printf("%c",SVRB);
-        }
-        printf("\n%d",i+1);
-        if(i < 9) {
+        printf("\n%d", i + 1);
+        if (i < 9) {
             printf(" ");
         }
         for (int j = 0; j < MaxGrile; ++j) {
-            printf("%c %d ",SVSB,grille[i][j]);
+            printf("%c %d ", SVSB, grille[i][j]);
         }
-        printf("%c\n",SVSB);
+        printf("%c\n", SVSB);
     }
-    printf("  %c",SBLC);
-    for (int l = 0; l < MaxGrile-1; ++l) {
-        printf("%c%c%c",SHSB,SHSB,SHSB);
-        printf("%c",SHBB);
+    printf("  %c", SBLC);
+    for (int l = 0; l < MaxGrile - 1; ++l) {
+        printf("%c%c%c", SHSB, SHSB, SHSB);
+        printf("%c", SHBB);
     }
-    printf("%c%c%c",SHSB,SHSB,SHSB);
-    printf("%c",SBRC);
+    printf("%c%c%c", SHSB, SHSB, SHSB);
+    printf("%c", SBRC);
 }
-void Tire(){
-    int tir[1];
-    char col = tir[0] - 49;
-    char ligne = tir[0] - 56;
 
-    printf("Choisir une case");
-    scanf("%s",&tir);
+void Tire() {
+    char tir[1];
 
-    while(col > 0 || col < 9 || ligne > 0 || ligne < 9){
+
+    printf("Choisir une case  ");
+    scanf("%s", &tir);
+    int col = tir[1] - 49;
+    int ligne = tir[0] - 65;
+
+    while (col < 0 || col > 9 || ligne < 0 || ligne > 9) {
         printf("Il n'y a pas de case ici\n\n");
         printf("Choisir une case");
-        scanf("%s",&tir);
+        scanf("%s", &tir);
 
-        char col = tir[0] - 49;
-        char ligne = tir[0] - 56;
+        col = tir[1] - 49;
+        ligne = tir[0] - 65;
     }
+
+    if (grille[col][ligne] == 1) {
+        printf("Touche");
+        grille[col][ligne] = 2;
+    }
+    else{
+        printf("Pas touche");
+        grille[col][ligne] = 3;
+    }
+
+
     //ajouter affichage case
     //ajouter le touché
     //ajouter le coulé
     //ajouter fin de la partie (gagné)
 }
+
 int main() {
     int choice = 0;
     int test = 0;
 
-    while(1){
+    while (1) {
         printf("\n1. Afficher la grille");
         printf("\n2. Afficher les regles");
         printf("\n4. Quitter");
-        scanf("%d",&choice);
+        scanf("%d", &choice);
 
         if (choice == 1) {
             BateauxFixes();
             GrilleVide();
-            scanf("%d",&test);
+
+            Tire();
+            printf("\n\nEntrz une valeur pour quitter");
+            scanf("%d", &test);
             return 0;
-        }
-        else if(choice == 2){
+        } else if (choice == 2) {
             printf("\n\nLa bataille navale oppose deux joueurs qui s'affrontent."
                    "\nChacun a une flotte composee de 3 bateaux, qui sont, en general, les suivants :\n1 porte-avion (5 cases)\n1 croiseur (4 cases)"
                    "\nUn a un, les joueurs vont tirer sur une case de l'adversaire.");
             choice = -1;
             printf("\n\n");
-        }
-        else if (choice == 4) {
+        } else if (choice == 4) {
             return 0;
-        }
-        else {
+        } else {
             printf("Ce n'est pas un chois possible");
             choice = -1;
         }
