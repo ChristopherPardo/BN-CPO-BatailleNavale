@@ -1,7 +1,7 @@
 /*
  * Bataille Navale
  * Christopher Pardo
- * 21.03.2019
+ * 22.03.2019
  */
 #include <stdio.h>
 #include <windows.h>
@@ -24,13 +24,13 @@ int grille[MaxGrile][MaxGrile];
 
 void BateauxFixes() {
     for (int i = 5; i < 8; ++i) {
-        grille[i][1] = 1;
+        grille[i][1] = 3;
     }
     for (int i = 3; i < 7; ++i) {
-        grille[0][i] = 1;
+        grille[0][i] = 4;
     }
     for (int i = 6; i < 8; ++i) {
-        grille[6][i] = 1;
+        grille[6][i] = 2;
     }
 }
 
@@ -66,7 +66,15 @@ void GrilleVide() {
             printf(" ");
         }
         for (int j = 0; j < MaxGrile; ++j) {
-            printf("%c %d ", SVSB, grille[i][j]);
+            if (grille[i][j] < 10) {
+                printf("%c ~ ", SVSB);
+            }
+            else if(grille[i][j] < 20){
+                printf("%c X ", SVSB);
+            }
+            else{
+                printf("%c * ", SVSB);
+            }
         }
         printf("%c\n", SVSB);
     }
@@ -81,7 +89,7 @@ void GrilleVide() {
 
 void Tire() {
     char tir[1];
-
+    int hit[5];
 
     printf("Choisir une case  ");
     scanf("%s", &tir);
@@ -105,6 +113,14 @@ void Tire() {
         printf("Pas touche");
         grille[col][ligne] = 3;
     }
+    //pas encore fini cette partie mais comme je sais que tu vas pas t'en rappeller je te dit juste de que un hit et un bateaux complet et que si le hit a la meme valeur que le nombre de case du bateux alors le bateaux est coulé
+    //surement qu'il faut ajouter un "for" pour dire a quoi corespond "i" mais pas encore sure
+    if(grille[col][ligne] == i){
+        hit[i]++;
+        if(hit[i] == i){
+            printf(" Coule");
+        }
+    }
 
 
     //ajouter affichage case
@@ -121,6 +137,7 @@ int main() {
         printf("\n1. Afficher la grille");
         printf("\n2. Afficher les regles");
         printf("\n4. Quitter");
+        printf("\n\n\tVotre choix:");
         scanf("%d", &choice);
 
         if (choice == 1) {
