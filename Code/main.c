@@ -1,7 +1,7 @@
 /*
  * Bataille Navale
  * Christopher Pardo
- * 22.03.2019
+ * 25.03.2019
  */
 #include <stdio.h>
 #include <windows.h>
@@ -21,6 +21,7 @@
 #define MaxGrile 10
 
 int grille[MaxGrile][MaxGrile];
+int win = 3;
 
 void BateauxFixes() {
     for (int i = 5; i < 8; ++i) {
@@ -66,11 +67,15 @@ void GrilleVide() {
             printf(" ");
         }
         for (int j = 0; j < MaxGrile; ++j) {
+           // printf("test de [%d,%d] %d\n",i,j,grille[i][j]);
             if (grille[i][j] < 10) {
                 printf("%c ~ ", SVSB);
             }
             else if(grille[i][j] < 20){
                 printf("%c X ", SVSB);
+            }
+            else if(grille[i][j] == 100){
+                printf("%c . ", SVSB);
             }
             else{
                 printf("%c * ", SVSB);
@@ -105,23 +110,25 @@ void Tire() {
         ligne = tir[0] - 65;
     }
 
-    if (grille[col][ligne] == 1) {
+    if (grille[col][ligne] < 10 && grille[col][ligne] > 0) {
         printf("Touche");
-        grille[col][ligne] = 2;
+        grille[col][ligne] = grille[col][ligne] + 10;
     }
     else{
         printf("Pas touche");
-        grille[col][ligne] = 3;
+        grille[col][ligne] = 100;
     }
     //pas encore fini cette partie mais comme je sais que tu vas pas t'en rappeller je te dit juste de que un hit et un bateaux complet et que si le hit a la meme valeur que le nombre de case du bateux alors le bateaux est coulé
     //surement qu'il faut ajouter un "for" pour dire a quoi corespond "i" mais pas encore sure
-    if(grille[col][ligne] == i){
-        hit[i]++;
-        if(hit[i] == i){
-            printf(" Coule");
+    /*for (int i = 0; i < 4; ++i) {
+        if(grille[col][ligne] == i){
+            hit[i]++;
+            if(hit[i] == i){
+                printf(" Coule");
+                win--;
+            }
         }
-    }
-
+    }*/
 
     //ajouter affichage case
     //ajouter le touché
@@ -142,9 +149,10 @@ int main() {
 
         if (choice == 1) {
             BateauxFixes();
-            GrilleVide();
-
-            Tire();
+            while(win != 0) {
+                GrilleVide();
+                Tire();
+            }
             printf("\n\nEntrz une valeur pour quitter");
             scanf("%d", &test);
             return 0;
