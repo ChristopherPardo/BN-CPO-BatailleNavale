@@ -1,7 +1,7 @@
 /*
  * Bataille Navale
  * Christopher Pardo
- * 25.03.2019
+ * 28.03.2019
  */
 #include <stdio.h>
 #include <windows.h>
@@ -22,6 +22,7 @@
 
 int grille[MaxGrile][MaxGrile];
 int win = 3;
+int hit[5];
 
 void BateauxFixes() {
     for (int i = 5; i < 8; ++i) {
@@ -67,7 +68,7 @@ void GrilleVide() {
             printf(" ");
         }
         for (int j = 0; j < MaxGrile; ++j) {
-           // printf("test de [%d,%d] %d\n",i,j,grille[i][j]);
+            //printf("test de [%d,%d] %d\n",i,j,grille[i][j]);
             if (grille[i][j] < 10) {
                 printf("%c ~ ", SVSB);
             }
@@ -94,7 +95,6 @@ void GrilleVide() {
 
 void Tire() {
     char tir[1];
-    int hit[5];
 
     printf("Choisir une case  ");
     scanf("%s", &tir);
@@ -120,15 +120,22 @@ void Tire() {
     }
     //pas encore fini cette partie mais comme je sais que tu vas pas t'en rappeller je te dit juste de que un hit et un bateaux complet et que si le hit a la meme valeur que le nombre de case du bateux alors le bateaux est coulé
     //surement qu'il faut ajouter un "for" pour dire a quoi corespond "i" mais pas encore sure
-    /*for (int i = 0; i < 4; ++i) {
-        if(grille[col][ligne] == i){
+    for (int i = 1; i < 5; ++i) {
+        if(grille[col][ligne] == i+10){
             hit[i]++;
             if(hit[i] == i){
                 printf(" Coule");
                 win--;
+                for (int x = 0; x < MaxGrile; ++x) {
+                    for (int y = 0; y < MaxGrile; ++y) {
+                        if(grille[x][y] == i+10){
+                            grille[x][y] = grille[x][y] + 10;
+                        }
+                    }
+                }
             }
         }
-    }*/
+    }
 
     //ajouter affichage case
     //ajouter le touché
@@ -153,8 +160,7 @@ int main() {
                 GrilleVide();
                 Tire();
             }
-            printf("\n\nEntrz une valeur pour quitter");
-            scanf("%d", &test);
+            system("pause");
             return 0;
         } else if (choice == 2) {
             printf("\n\nLa bataille navale oppose deux joueurs qui s'affrontent."
