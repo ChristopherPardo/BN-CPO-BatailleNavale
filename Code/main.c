@@ -95,28 +95,36 @@ void GrilleVide() {
 
 void Tire() {
     char tir[1];
+    int verif = 0;
+    int col;
+    int ligne;
 
-    printf("Choisir une case  ");
-    scanf("%s", &tir);
-    int col = tir[1] - 49;
-    int ligne = tir[0] - 65;
-
-    while (col < 0 || col > 9 || ligne < 0 || ligne > 9) {
-        printf("Il n'y a pas de case ici\n\n");
-        printf("Choisir une case");
+    while(verif != 1) {
+        printf("Choisir une case  ");
         scanf("%s", &tir);
-
         col = tir[1] - 49;
         ligne = tir[0] - 65;
-    }
 
-    if (grille[col][ligne] < 10 && grille[col][ligne] > 0) {
-        printf("Touche");
-        grille[col][ligne] = grille[col][ligne] + 10;
-    }
-    else{
-        printf("Pas touche");
-        grille[col][ligne] = 100;
+        while (col < 0 || col > 9 || ligne < 0 || ligne > 9) {
+            printf("Il n'y a pas de case ici\n\n");
+            printf("Choisir une case");
+            scanf("%s", &tir);
+
+            col = tir[1] - 49;
+            ligne = tir[0] - 65;
+        }
+
+        if (grille[col][ligne] < 10 && grille[col][ligne] > 0) {
+            printf("Touche");
+            grille[col][ligne] = grille[col][ligne] + 10;
+            verif = 1;
+        } else if (grille[col][ligne] > 9) {
+            printf("Vous ne pouvez pas tirer 2 fois sur la meme case\n\n");
+        } else {
+            printf("Pas touche");
+            grille[col][ligne] = 100;
+            verif = 1;
+        }
     }
     //pas encore fini cette partie mais comme je sais que tu vas pas t'en rappeller je te dit juste de que un hit et un bateaux complet et que si le hit a la meme valeur que le nombre de case du bateux alors le bateaux est coulé
     //surement qu'il faut ajouter un "for" pour dire a quoi corespond "i" mais pas encore sure
