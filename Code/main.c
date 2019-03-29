@@ -152,17 +152,16 @@ void Tire() {
 }
 
 int main() {
-    int choice = 0;
-    int test = 0;
+    char choice[1];
 
     while (1) {
         printf("\n1. Afficher la grille");
         printf("\n2. Afficher les regles");
         printf("\n4. Quitter");
         printf("\n\n\tVotre choix:");
-        scanf("%d", &choice);
+        scanf("%s", &choice);
 
-        if (choice == 1) {
+        if (strcmp(choice, "1")  == 0) {
             BateauxFixes();
             while(win != 0) {
                 GrilleVide();
@@ -170,17 +169,17 @@ int main() {
             }
             system("pause");
             return 0;
-        } else if (choice == 2) {
+        } else if (strcmp(choice, "2")  == 0) {
             printf("\n\nLa bataille navale oppose deux joueurs qui s'affrontent."
                    "\nChacun a une flotte composee de 3 bateaux, qui sont, en general, les suivants :\n1 porte-avion (5 cases)\n1 croiseur (4 cases)"
                    "\nUn a un, les joueurs vont tirer sur une case de l'adversaire.");
-            choice = -1;
+            choice[1] = -1;
             printf("\n\n");
-        } else if (choice == 4) {
+        } else if (strcmp(choice, "4")  == 0) {
             return 0;
         } else {
             printf("Ce n'est pas un chois possible");
-            choice = -1;
+            choice[1] = -1;
         }
     }
 }
