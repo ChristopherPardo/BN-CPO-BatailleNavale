@@ -1,7 +1,7 @@
 /*
  * Bataille Navale
  * Christopher Pardo
- * 28.03.2019
+ * 01.04.2019
  */
 #include <stdio.h>
 #include <windows.h>
@@ -126,8 +126,6 @@ void Tire() {
             verif = 1;
         }
     }
-    //pas encore fini cette partie mais comme je sais que tu vas pas t'en rappeller je te dit juste de que un hit et un bateaux complet et que si le hit a la meme valeur que le nombre de case du bateux alors le bateaux est coulé
-    //surement qu'il faut ajouter un "for" pour dire a quoi corespond "i" mais pas encore sure
     for (int i = 1; i < 5; ++i) {
         if(grille[col][ligne] == i+10){
             hit[i]++;
@@ -144,11 +142,6 @@ void Tire() {
             }
         }
     }
-
-    //ajouter affichage case
-    //ajouter le touché
-    //ajouter le coulé
-    //ajouter fin de la partie (gagné)
 }
 
 int main() {
@@ -166,6 +159,9 @@ int main() {
             while(win != 0) {
                 GrilleVide();
                 Tire();
+            }
+            if(win == 0){
+                printf("\nVictoire\n\n");
             }
             system("pause");
             return 0;
