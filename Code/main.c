@@ -22,6 +22,7 @@
 
 int grille[MaxGrile][MaxGrile];
 int win = 3;
+int time;
 int hit[5];
 
 void BateauxFixes() {
@@ -156,12 +157,15 @@ int main() {
 
         if (strcmp(choice, "1")  == 0) {
             BateauxFixes();
-            while(win != 0) {
+            while(win != 0 || time > 35) {
                 GrilleVide();
                 Tire();
             }
             if(win == 0){
                 printf("\nVictoire\n\n");
+            }
+            else{
+                printf("\nDefaite\n\n");
             }
             system("pause");
             return 0;
