@@ -1,7 +1,7 @@
 /*
  * Bataille Navale
  * Christopher Pardo
- * 01.04.2019
+ * 04.04.2019
  */
 #include <stdio.h>
 #include <windows.h>
@@ -19,11 +19,13 @@
 #define SC   197 // ┼, Single Center
 
 #define MaxGrile 10
+#define MaxTour 2
 
 int grille[MaxGrile][MaxGrile];
 int win = 3;
-int time;
+int time = 0;
 int hit[5];
+
 
 void BateauxFixes() {
     for (int i = 5; i < 8; ++i) {
@@ -119,12 +121,14 @@ void Tire() {
             printf("Touche");
             grille[col][ligne] = grille[col][ligne] + 10;
             verif = 1;
+            time += 1;
         } else if (grille[col][ligne] > 9) {
             printf("Vous ne pouvez pas tirer 2 fois sur la meme case\n\n");
         } else {
             printf("Pas touche");
             grille[col][ligne] = 100;
             verif = 1;
+            time += 1;
         }
     }
     for (int i = 1; i < 5; ++i) {
@@ -157,15 +161,32 @@ int main() {
 
         if (strcmp(choice, "1")  == 0) {
             BateauxFixes();
-            while(win != 0 || time > 35) {
+            while(win != 0 && time <= MaxTour) {
                 GrilleVide();
+                printf("\nVous etes au tour %d\n\n",time);
                 Tire();
             }
             if(win == 0){
-                printf("\nVictoire\n\n");
+                printf("\n\n\t         _________ _______ _________ _______ _________ _______  _______ \n"
+                       "\t|\\     /|\\__   __/(  ____ \\\\__   __/(  ___  )\\__   __/(  ____ )(  ____ \\\n"
+                       "\t| )   ( |   ) (   | (    \\/   ) (   | (   ) |   ) (   | (    )|| (    \\/\n"
+                       "\t| |   | |   | |   | |         | |   | |   | |   | |   | (____)|| (__    \n"
+                       "\t( (   ) )   | |   | |         | |   | |   | |   | |   |     __)|  __)   \n"
+                       "\t \\ \\_/ /    | |   | |         | |   | |   | |   | |   | (\\ (   | (      \n"
+                       "\t  \\   /  ___) (___| (____/\\   | |   | (___) |___) (___| ) \\ \\__| (____/\\\n"
+                       "\t   \\_/   \\_______/(_______/   )_(   (_______)\\_______/|/   \\__/(_______/\n"
+                       "\t                                                                        \n\n");
             }
-            else{
-                printf("\nDefaite\n\n");
+            else if(time > MaxTour){
+                printf("\n\n\t ______   _______  _______  _______ __________________ _______ \n"
+                       "\t(  __  \\ (  ____ \\(  ____ \\(  ___  )\\__   __/\\__   __/(  ____ \\\n"
+                       "\t| (  \\  )| (    \\/| (    \\/| (   ) |   ) (      ) (   | (    \\/\n"
+                       "\t| |   ) || (__    | (__    | (___) |   | |      | |   | (__    \n"
+                       "\t| |   | ||  __)   |  __)   |  ___  |   | |      | |   |  __)   \n"
+                       "\t| |   ) || (      | (      | (   ) |   | |      | |   | (      \n"
+                       "\t| (__/  )| (____/\\| )      | )   ( |___) (___   | |   | (____/\\\n"
+                       "\t(______/ (_______/|/       |/     \\|\\_______/   )_(   (_______/\n"
+                       "\t                                                               \n\n");
             }
             system("pause");
             return 0;
