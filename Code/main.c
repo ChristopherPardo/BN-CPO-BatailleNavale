@@ -100,17 +100,21 @@ void GrilleVide() {
 }
 
 void Tire() {
-    char tir[1];
+    char tir[2];
     int verif = 0;
     int col;
     int ligne;
 
     while(verif != 1) {
+        if(tir[1] == 1 || tir[2] == 0){
+            col = tir[1] - 49 - 10; //ICI
+        }
+        else{
+            col = tir[1] - 49;
+        }
         printf("Choisir une case  ");
         scanf("%s", &tir);
-        col = tir[1] - 49;
         ligne = tir[0] - 65;
-
         while (col < 0 || col > 9 || ligne < 0 || ligne > 9) {
             printf("Il n'y a pas de case ici\n\n");
             printf("Choisir une case");
@@ -167,7 +171,7 @@ int main() {
             BateauxFixes();
             while(win != 0 && time <= MaxTour) {
                 GrilleVide();
-                printf("\nIl vous reste %d tours\n\n",MaxTour - time + 1);
+                printf("\nIl vous reste %d tours\n\n",MaxTour - time);
                 Tire();
             }
             if(win == 0){
