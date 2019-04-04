@@ -5,6 +5,7 @@
  */
 #include <stdio.h>
 #include <windows.h>
+#pragma execution_character_set( "utf-8" )
 
 #define STLC 218 // ┌, Single Top Left Corner
 #define STRC 191 // ┐, Single Top Right Corner
@@ -19,7 +20,7 @@
 #define SC   197 // ┼, Single Center
 
 #define MaxGrile 10
-#define MaxTour 2
+#define MaxTour 30
 
 int grille[MaxGrile][MaxGrile];
 int win = 3;
@@ -40,6 +41,7 @@ void BateauxFixes() {
 }
 
 void GrilleVide() {
+    SetConsoleOutputCP(437);
     printf("\n\n    A   B   C   D   E   F   G   H   I   J\n");
     for (int i = 0; i < MaxGrile; i++) {
         printf("  ");
@@ -94,6 +96,7 @@ void GrilleVide() {
     }
     printf("%c%c%c", SHSB, SHSB, SHSB);
     printf("%c", SBRC);
+    SetConsoleOutputCP(65001);
 }
 
 void Tire() {
@@ -118,14 +121,14 @@ void Tire() {
         }
 
         if (grille[col][ligne] < 10 && grille[col][ligne] > 0) {
-            printf("Touche");
+            printf("Touché");
             grille[col][ligne] = grille[col][ligne] + 10;
             verif = 1;
             time += 1;
         } else if (grille[col][ligne] > 9) {
-            printf("Vous ne pouvez pas tirer 2 fois sur la meme case\n\n");
+            printf("Vous ne pouvez pas tirer 2 fois sur la même case\n\n");
         } else {
-            printf("Pas touche");
+            printf("À l'eau");
             grille[col][ligne] = 100;
             verif = 1;
             time += 1;
@@ -135,7 +138,7 @@ void Tire() {
         if(grille[col][ligne] == i+10){
             hit[i]++;
             if(hit[i] == i){
-                printf(" Coule");
+                printf(" Coulé");
                 win--;
                 for (int x = 0; x < MaxGrile; ++x) {
                     for (int y = 0; y < MaxGrile; ++y) {
@@ -150,11 +153,12 @@ void Tire() {
 }
 
 int main() {
+    SetConsoleOutputCP(65001);
     char choice[1];
 
     while (1) {
         printf("\n1. Afficher la grille");
-        printf("\n2. Afficher les regles");
+        printf("\n2. Afficher les règles");
         printf("\n4. Quitter");
         printf("\n\n\tVotre choix:");
         scanf("%s", &choice);
@@ -163,7 +167,7 @@ int main() {
             BateauxFixes();
             while(win != 0 && time <= MaxTour) {
                 GrilleVide();
-                printf("\nVous etes au tour %d\n\n",time);
+                printf("\nIl vous reste %d tours\n\n",MaxTour - time + 1);
                 Tire();
             }
             if(win == 0){
@@ -178,6 +182,7 @@ int main() {
                        "\t                                                                        \n\n");
             }
             else if(time > MaxTour){
+                printf("\nVous avez dépassé le nombre maximal de tours");
                 printf("\n\n\t ______   _______  _______  _______ __________________ _______ \n"
                        "\t(  __  \\ (  ____ \\(  ____ \\(  ___  )\\__   __/\\__   __/(  ____ \\\n"
                        "\t| (  \\  )| (    \\/| (    \\/| (   ) |   ) (      ) (   | (    \\/\n"
