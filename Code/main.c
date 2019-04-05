@@ -1,7 +1,7 @@
 /*
  * Bataille Navale
  * Christopher Pardo
- * 04.04.2019
+ * 05.04.2019
  */
 #include <stdio.h>
 #include <windows.h>
@@ -27,6 +27,29 @@ int win = 3;
 int time = 0;
 int hit[5];
 
+void BateauxFichier(){
+    int nombre_aleatoire;
+
+    //nombre_aleatoire = 1 + rand() % 8;
+    FILE *fichier = NULL;
+    //switch (nombre_aleatoire)
+    //{
+        //case 1:
+            fichier = fopen("Grille1.txt", "r");
+            //break;
+    //}
+
+
+    for (int li = 0; li < 10; li++)
+    {
+        for (int col = 0; col < 10; col++)
+        {
+            char c = fgetc(fichier);
+            grille[li][col] = c - '0';
+        }
+    }
+    fclose(fichier);
+}
 
 void BateauxFixes() {
     for (int i = 5; i < 8; ++i) {
@@ -73,7 +96,7 @@ void GrilleVide() {
             printf(" ");
         }
         for (int j = 0; j < MaxGrile; ++j) {
-            //printf("test de [%d,%d] %d\n",i,j,grille[i][j]);
+            printf("test de [%d,%d] %d\n",i,j,grille[i][j]);
             if (grille[i][j] < 10) {
                 printf("%c ~ ", SVSB);
             }
@@ -100,27 +123,33 @@ void GrilleVide() {
 }
 
 void Tire() {
-    char tir[2];
+    char tir[3];
     int verif = 0;
     int col;
     int ligne;
 
     while(verif != 1) {
-        if(tir[1] == 1 || tir[2] == 0){
-            col = tir[1] - 49 - 10; //ICI
+        printf("Choisir une case  ");
+        scanf("%s", &tir);
+        printf("%d\n",strlen(tir));
+        if(strlen(tir) == 3){
+            col = 10*(tir[1] - 49) + (tir[2] - 49) + 10; //ICI
         }
         else{
             col = tir[1] - 49;
         }
-        printf("Choisir une case  ");
-        scanf("%s", &tir);
         ligne = tir[0] - 65;
-        while (col < 0 || col > 9 || ligne < 0 || ligne > 9) {
+        while (col < 0 || col > 9 || ligne < 0 || ligne > 9 || strlen(tir) > 3 ) {
             printf("Il n'y a pas de case ici\n\n");
             printf("Choisir une case");
             scanf("%s", &tir);
 
-            col = tir[1] - 49;
+            if(strlen(tir) == 3){
+                col = 10*(tir[1] - 49) + (tir[2] - 49) + 10; //ICI
+            }
+            else{
+                col = tir[1] - 49;
+            }
             ligne = tir[0] - 65;
         }
 
@@ -168,7 +197,8 @@ int main() {
         scanf("%s", &choice);
 
         if (strcmp(choice, "1")  == 0) {
-            BateauxFixes();
+            //BateauxFixes();
+            BateauxFichier();
             while(win != 0 && time <= MaxTour) {
                 GrilleVide();
                 printf("\nIl vous reste %d tours\n\n",MaxTour - time);
