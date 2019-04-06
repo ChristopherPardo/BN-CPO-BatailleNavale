@@ -1,7 +1,7 @@
 /*
  * Bataille Navale
  * Christopher Pardo
- * 05.04.2019
+ * 06.04.2019
  */
 #include <stdio.h>
 #include <windows.h>
@@ -29,39 +29,37 @@ int hit[5];
 
 void BateauxFichier(){
     int nombre_aleatoire;
+    char c;
 
-    //nombre_aleatoire = 1 + rand() % 8;
+    nombre_aleatoire = 1 + rand() % 4;
     FILE *fichier = NULL;
-    //switch (nombre_aleatoire)
-    //{
-        //case 1:
-            fichier = fopen("Grille1.txt", "r");
-            //break;
-    //}
-
-
-    for (int li = 0; li < 10; li++)
+    switch (nombre_aleatoire)
     {
-        for (int col = 0; col < 10; col++)
-        {
-            char c = fgetc(fichier);
-            grille[li][col] = c - '0';
+        case 1:
+            fichier = fopen("Grilles/Grille_1.txt", "r");
+            break;
+        case 2:
+            fichier = fopen("Grilles/Grille_2.txt", "r");
+            break;
+        case 3:
+            fichier = fopen("Grilles/Grille_3.txt", "r");
+            break;
+        case 4:
+            fichier = fopen("Grilles/Grille_4.txt", "r");
+            break;
+    }
+
+    for (int i = 0; i < MaxGrile; ++i) {
+        for (int j = 0; j < MaxGrile; ++j) {
+            do{
+                c = fgetc(fichier);
+                grille[i][j] = c - 48;
+            }while(c <= 32);
         }
     }
     fclose(fichier);
 }
 
-void BateauxFixes() {
-    for (int i = 5; i < 8; ++i) {
-        grille[i][1] = 3;
-    }
-    for (int i = 3; i < 7; ++i) {
-        grille[0][i] = 4;
-    }
-    for (int i = 6; i < 8; ++i) {
-        grille[6][i] = 2;
-    }
-}
 
 void GrilleVide() {
     SetConsoleOutputCP(437);
@@ -96,7 +94,7 @@ void GrilleVide() {
             printf(" ");
         }
         for (int j = 0; j < MaxGrile; ++j) {
-            printf("test de [%d,%d] %d\n",i,j,grille[i][j]);
+            //printf("test de [%d,%d] %d\n",i,j,grille[i][j]);
             if (grille[i][j] < 10) {
                 printf("%c ~ ", SVSB);
             }
@@ -154,6 +152,7 @@ void Tire() {
         }
 
         if (grille[col][ligne] < 10 && grille[col][ligne] > 0) {
+            system("cls");
             printf("Touché");
             grille[col][ligne] = grille[col][ligne] + 10;
             verif = 1;
@@ -161,6 +160,7 @@ void Tire() {
         } else if (grille[col][ligne] > 9) {
             printf("Vous ne pouvez pas tirer 2 fois sur la même case\n\n");
         } else {
+            system("cls");
             printf("À l'eau");
             grille[col][ligne] = 100;
             verif = 1;
@@ -192,12 +192,12 @@ int main() {
     while (1) {
         printf("\n1. Afficher la grille");
         printf("\n2. Afficher les règles");
-        printf("\n4. Quitter");
+        printf("\n3. Quitter");
         printf("\n\n\tVotre choix:");
         scanf("%s", &choice);
 
         if (strcmp(choice, "1")  == 0) {
-            //BateauxFixes();
+            system("cls");
             BateauxFichier();
             while(win != 0 && time <= MaxTour) {
                 GrilleVide();
@@ -230,15 +230,20 @@ int main() {
             system("pause");
             return 0;
         } else if (strcmp(choice, "2")  == 0) {
+            system("cls");
             printf("\n\nLa bataille navale oppose deux joueurs qui s'affrontent."
                    "\nChacun a une flotte composee de 3 bateaux, qui sont, en general, les suivants :\n1 porte-avion (5 cases)\n1 croiseur (4 cases)"
                    "\nUn a un, les joueurs vont tirer sur une case de l'adversaire.");
             choice[1] = -1;
             printf("\n\n");
-        } else if (strcmp(choice, "4")  == 0) {
+            system("pause");
+            system("cls");
+        } else if (strcmp(choice, "3")  == 0) {
             return 0;
         } else {
-            printf("Ce n'est pas un chois possible");
+            system("cls");
+            printf("Ce n'est pas un chois possible"
+                   "\n\nEntrez une valeure entre 1 et 3\n");
             choice[1] = -1;
         }
     }
