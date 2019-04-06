@@ -21,4 +21,4 @@ Pour générer l'exécutable, vous devez:
 Pour exécuter le programme, vous devez:
 
 1. Aller dans le dossier qui contient l'executable.
-1. Double-cliquez sur BN_DMI_BataileNavale.ex
+1. Double-cliquez sur BN_CPO_BataileNavale.exe
