@@ -1,7 +1,7 @@
 # Bataille Navale
 
 ## Description
-Coder une bataille navale contre l'ordinateur
+Coder une bataille navale contre le temps
 
 
 ## Génération
